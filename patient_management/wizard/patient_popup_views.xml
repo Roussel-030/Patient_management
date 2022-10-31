@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record  model="ir.ui.view" id="patient_popup_view_form">
+            <field name="name">patient_popup_view_form</field>
+            <field name="model">patient.popup</field>
+            <field name="arch" type="xml">
+                <form string="patient_popup_form">
+                    <sheet>
+                        <group>
+                            <field name="birthday"/>
+                        </group>
+                    </sheet>
+                      <footer>
+                        <button type="object" class="oe_highlight" name="update_birthday" string="Valider"/>
+                        <button special="cancel" string="Annuler"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

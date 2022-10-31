@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="patient_management_view_tree">
+      <field name="name">patient_management_view_tree</field>
+      <field name="model">patient.management</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="age"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="patient_management_view_form">
+            <field name="name">patient_management_view_form</field>
+            <field name="model">patient.management</field>
+            <field name="arch" type="xml">
+                <form string="patient_management_form">
+                    <header>
+                        <button name="set_consult" string="Consulter" class="oe_highlight" states="new" type="object"/>
+                        <button name="set_treaty" string="Traité" class="oe_highlight" states="consult" type="object"/>
+                        <button name="set_cancelled" string="Annulé" class="oe_highlight" states="treaty" type="object"/>
+                        <button name="set_renew" string="Renouveler" class="oe_highlight" states="cancelled" type="object"/>
+                        <button name="open_wizard" string="Popup" class="oe_highlight" type="object"/>
+                        <field
+                                name="state"
+                                widget="statusbar"
+                                statusbar_visible="new,consult,treaty,cancelled"
+                                clickable="True"
+                        />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <h2>Inscription</h2>
+                                <field name="firstname" required="1"/>
+                                <field name="lastname"/>
+                                <field name="age"/>
+                            </group>
+                        </group>
+                    </sheet>
+                      <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                      </div>
+                </form>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="patient_management_action">
+      <field name="name">Liste des Patients</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">patient.management</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="GESTION DES PATIENTS" id="patient_management_root"/>
+    <menuitem
+            name="Patient"
+            id="patient_management.menu_1"
+            action="patient_management_action"
+            parent="patient_management_root"
+    />
+
+  </data>
+</odoo>
